@@ -4,7 +4,7 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     image: mariadb_image
     restart: always
     env_file:
@@ -56,10 +56,10 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/${USER}/data/mariadb
-  wordpress:
+      device: ${DATA_PATH}/mariadb
+  wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/${USER}/data/wordpress
+      device: ${DATA_PATH}/wordpress
