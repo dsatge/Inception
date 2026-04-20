@@ -20,10 +20,21 @@ setup:
 	@echo "$(GREEN)Dossier de données : $(DATA_PATH)$(RESET)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
+	@if ! grep -q "DATA_PATH" srcs/.env; then \
+		echo "DATA_PATH=$(DATA_PATH)" >> srcs/.env; \
+	fi
 
 build:
 	@echo "$(GREEN)Lancement de Docker Compose...$(RESET)"
 	@DATA_PATH=$(DATA_PATH) docker-compose -f $(COMPOSE_FILE) up --build -d
+
+stop:
+	@echo "$(RED)Arrêt des conteneurs...$(RESET)"
+	@docker-compose -f $(COMPOSE_FILE) stop
+
+# clean: stop
+# 	@echo "$(RED)Suppression des conteneurs...$(RESET)"
+# 	@docker-compose -f $(COMPOSE_FILE) down
 
 clean:
 	@echo "$(RED)Suppression des conteneurs...$(RESET)"
