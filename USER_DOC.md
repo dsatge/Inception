@@ -44,7 +44,6 @@ Navigate to the root of the project and run: \
 Once the containers are "Healthy" and "Started", you can access the service via your browser: \
 Website (Frontend): https://dsatge.42.fr \
 WordPress Admin (Backend): https://dsatge.42.fr/wp-admin \
-WordPress User (Backend): https://dsatge.42.fr/wp-user \
 
 > [!NOTE]
 > Since the SSL certificate is self-signed, your browser will show a security warning. You can safely bypass this by clicking "Advanced" and "Proceed to site."
