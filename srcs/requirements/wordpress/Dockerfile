@@ -1,13 +1,19 @@
 FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y \
-	wget \
-	curl \
-	php7.4 \
-	php-fpm \
-	php-mysql \
-	mariadb-client \
-	&& rm -rf /var/lib/apt/lists/*
+    wget \
+    curl \
+    php7.4 \
+    php7.4-fpm \
+    php7.4-mysql \
+    php7.4-curl \
+    php7.4-gd \
+    php7.4-intl \
+    php7.4-mbstring \
+    php7.4-xml \
+    php7.4-zip \
+    mariadb-client \
+    && rm -rf /var/lib/apt/lists/*
 
 # download WP-CLI -> online tool for wordpress commands
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \

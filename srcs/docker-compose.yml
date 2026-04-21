@@ -6,13 +6,18 @@ services:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     image: mariadb
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     networks:
       - inception_network
     volumes:
       - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "$SQL_USER", "-p$SQL_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   wordpress:
     container_name: wordpress
@@ -20,9 +25,10 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     image: wordpress
-    restart: always
+    restart: unless-stopped
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     env_file:
       - .env
     networks:
@@ -36,9 +42,9 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     image: nginx
-    restart: always
+    restart: unless-stopped
     depends_on:
-      - wordpress
+       - wordpress
     ports:
       - "443:443"
     networks:

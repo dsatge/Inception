@@ -27,8 +27,18 @@ if [ ! -f wp-config.php ]; then
         --user_pass=$WP_USER_PASSWORD \
         --allow-root
     
+	wp config set FORCE_SSL_ADMIN true --allow-root
+
     echo "WordPress: installation terminée !"
 fi
+
+echo "Fixing permissions..."
+sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php/7.4/fpm/php.ini
+# Donne la propriété à www-data (l'utilisateur de PHP)
+chown -R www-data:www-data /var/www/html
+# Dossiers en 755 et fichiers en 644 (standard WordPress)
+find /var/www/html -type d -exec chmod 755 {} +
+find /var/www/html -type f -exec chmod 644 {} +
 
 echo "WordPress started on port 9000"
 exec /usr/sbin/php-fpm7.4 -F
