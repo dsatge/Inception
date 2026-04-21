@@ -26,11 +26,11 @@ setup:
 
 build:
 	@echo "$(GREEN)Lancement de Docker Compose...$(RESET)"
-	@DATA_PATH=$(DATA_PATH) docker-compose -f $(COMPOSE_FILE) up --build -d
+	@DATA_PATH=$(DATA_PATH) docker compose -f $(COMPOSE_FILE) up --build -d
 
 stop:
 	@echo "$(RED)Arrêt des conteneurs...$(RESET)"
-	@docker-compose -f $(COMPOSE_FILE) stop
+	@docker compose -f $(COMPOSE_FILE) stop
 
 # clean: stop
 # 	@echo "$(RED)Suppression des conteneurs...$(RESET)"
@@ -38,11 +38,11 @@ stop:
 
 clean:
 	@echo "$(RED)Suppression des conteneurs...$(RESET)"
-	@DATA_PATH=$(DATA_PATH) docker-compose -f $(COMPOSE_FILE) down -v
+	@DATA_PATH=$(DATA_PATH) docker compose -f $(COMPOSE_FILE) down -v
 
 fclean:
 	@echo "$(RED)Arrêt et nettoyage complet...$(RESET)"
-	@DATA_PATH=$(DATA_PATH) docker-compose -f $(COMPOSE_FILE) down -v
+	@DATA_PATH=$(DATA_PATH) docker compose -f $(COMPOSE_FILE) down -v
 	@docker system prune -af
 	@sudo rm -rf $(DATA_PATH)/mariadb/*
 	@sudo rm -rf $(DATA_PATH)/wordpress/*
