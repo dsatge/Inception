@@ -33,7 +33,7 @@ during the evaluation.
 Ensure you have Docker and Docker Compose installed on your system.
 
 > [!WARNING]
-> A file **.env needs to be added** into srcs/ folder. It needs to be prototyped as followed: 
+> A file **.env needs to be added** into srcs/ directory. It needs to be prototyped as followed: 
 > 
 > DOMAIN_NAME= ******** \
 > *Mariadb* \
