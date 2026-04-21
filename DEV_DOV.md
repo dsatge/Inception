@@ -8,7 +8,7 @@ This document details the internal architecture and technical choices made durin
 The project follows a micro-services architecture where each service runs in a dedicated container based on **Debian Bullseye**.
 
 ### Service Overview
-1.  **Nginx**: The entry point (TLS v1.2/1.3). It handles HTTPS requests and proxies PHP traffic to WordPress.
+1.  **Nginx**: The entry point (TLS v1.2/1.3). It handles HTTPS requests and proxies PHP traffic to WordPress. The certificate can be seen with the command : `openssl s_client -connect enschnei.42.fr:443 -tls1_3`.
 2.  **WordPress**: Runs PHP-FPM 7.4. It handles the application logic and communicates with the database.
 3.  **MariaDB**: The database engine storing WordPress tables and data.
 
